@@ -1,6 +1,6 @@
 {
-  "homepage": "https://arielg0rl.github.io/",
-  "name": "my-app",
+  "homepage": ".",
+  "name": "products-search",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
