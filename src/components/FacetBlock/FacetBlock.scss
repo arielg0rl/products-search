@@ -1,0 +1,139 @@
+.facet {
+  width: 366px;
+
+  &__head {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 54px;
+
+    &::before {
+      position: absolute;
+      content: '';
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: #EFEFEF;
+      transform: translateY(-27px);
+    }
+
+    &:last-child::after {
+      position: absolute;
+      content: '';
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: #EFEFEF;
+      transform: translateY(27px);
+    }
+  }
+
+  &__name {
+    padding-left: 22px;
+  }
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px 18px 8px 22px;
+
+    &-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__box {
+    background-image: url("../../photos/RectangleOrigin.svg");
+    object-fit: contain;
+    width: 20px;
+    height: 20px;
+    transition: 0.3s;
+
+    &:hover {
+      background-image: url("../../photos/RectangleHover.svg");
+    }
+
+    &--selected {
+      background-image: url("../../photos/RectangleChecked.svg");
+    }
+  }
+
+  &__value {
+    padding-left: 8px;
+  }
+
+  &__count {
+    color: #939393;
+  }
+
+  &__button {
+    width: 54px;
+    height: 54px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+
+    &-open {
+      background-image: url("../../photos/Plus.svg");
+    }
+
+    &-close {
+      background-image: url("../../photos/Minus.svg");
+    }
+  }
+
+  &__color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  &__more-button {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    margin: 2px 0 28px;
+    cursor: pointer;
+
+    &-word {
+      line-height: 16px;
+
+      &::before {
+        position: absolute;
+        content: '';
+        height: 0.5px;
+        width: 10px;
+        background-color: #121212;
+        transform: translate(-18px, 7px);
+      }
+
+      &--plus {
+        &::after {
+          position: absolute;
+          content: '';
+          height: 0.5px;
+          width: 10px;
+          background-color: #121212;
+          transform: translate(-50.5px, 7px) rotate(90deg);
+        }
+
+      }
+    }
+  }
+}

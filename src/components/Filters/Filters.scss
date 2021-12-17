@@ -1,0 +1,20 @@
+.Filters {
+
+  &__section {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
+    margin: 30px 0 22px 14px;
+
+    &::before {
+      position: absolute;
+      content: '';
+      height: 1px;
+      background-color: #EFEFEF;
+      transform: translateY(-27px);
+      left: 14px;
+      right: 14px;
+    }
+  }
+}
