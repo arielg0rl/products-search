@@ -7,9 +7,10 @@ interface Props {
   colorCodes: Color[];
   onMaterialSelect: (material: string) => void;
   onColorSelect: (color: ColorStyle | ImageStyle) => void;
+  selectedFilters: selectedFacet[];
 }
 
-export const FacetBlock: React.FC<Props> = ({ onColorSelect, onMaterialSelect, colorCodes, facet }) => {
+export const FacetBlock: React.FC<Props> = ({ selectedFilters, onColorSelect, onMaterialSelect, colorCodes, facet }) => {
   const sixItems = facet.values.slice(0, 6);
 
   const [ itemsToRender, setItemsToRender ] = useState(sixItems);
@@ -61,15 +62,15 @@ export const FacetBlock: React.FC<Props> = ({ onColorSelect, onMaterialSelect, c
   return (
     <div className="facet">
       <div className="facet__wrapper" key={facet.name}>
-        <div className="facet__head">
+        <label className="facet__head">
           <div className="facet__name">{facet.name}</div>
           {hidden ? (
-            <div className="facet__button facet__button-open" onClick={handleOpenButton}></div>
+            <button className="facet__button facet__button-open" onClick={handleOpenButton}></button>
           ) : (
-          <div className="facet__button facet__button-close" onClick={handleCloseButton}>
-          </div>
+          <button className="facet__button facet__button-close" onClick={handleCloseButton}>
+          </button>
           )}
-        </div>
+        </label>
 
         {!hidden && (
           <div className="facet__options">
@@ -78,29 +79,33 @@ export const FacetBlock: React.FC<Props> = ({ onColorSelect, onMaterialSelect, c
                 <div key={value.value}>
                 {facet.type === "text" &&
                   <div className="facet__option" key={value.value}>
-                    <div className="facet__option-wrapper">
-                      <div
-                        className={classNames("facet__box", {})}
-                        onClick={() => onMaterialSelect(value.value)}
+                    <label className="facet__option-wrapper">
+                      <button
+                        className={classNames("facet__box", { 'facet__box--selected': selectedFilters.find(facet => facet.value === value.value)})}
+                        onClick={() => {
+                          onMaterialSelect(value.value);
+                        }}
                       >
-                      </div>
+                      </button>
                       <div className="facet__value">{value.value}</div>
-                    </div>
+                    </label>
                     <div className="facet__count">({value.count})</div>
                   </div>
                 }
 
                 {facet.type === "color" &&
                   <div className="facet__option" key={value.value}>
-                    <div className="facet__option-wrapper">
-                      <div
+                    <label className="facet__option-wrapper">
+                      <button
                         style={getColor(value.value)}
-                        className="facet__color"
+                        className={classNames("facet__color", { 'facet__color--selected-color': selectedFilters.find(facet => {
+                          return typeof facet.value !== 'string' ? (facet.value).id === getColor(value.value).id : null;
+                        })})}
                         onClick={() => onColorSelect(getColor(value.value))}
                       >
-                      </div>
+                      </button>
                       <div className="facet__value">{value.value}</div>
-                    </div>
+                    </label>
                     <div className="facet__count">({value.count})</div>
                   </div>
                 }

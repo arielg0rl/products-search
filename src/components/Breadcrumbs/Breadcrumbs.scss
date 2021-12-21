@@ -14,6 +14,23 @@
     line-height: 16px;
   }
 
+  &__facet {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover::before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 1px;
+      background-color: #939393;
+      transform: translateX(-2px);
+    }
+  }
+
   &__button {
     width: 11px;
     height: 11px;
@@ -22,7 +39,8 @@
     background-size: contain;
     padding: 0 10px;
     background-position: center;
-    cursor: pointer;
+    border: 1px solid transparent;
+    background-color: transparent;
   }
 
   &__color {

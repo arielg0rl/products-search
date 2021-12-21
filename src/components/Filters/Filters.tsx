@@ -52,7 +52,7 @@ export const Filters: React.FC<Props> = ({ facets }) => {
         <div className="Filters__section">filters</div>
         <Breadcrumbs onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
       </div>
-      {facets.map(facet => <FacetBlock onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} key={facet.name} colorCodes={colorCodes} facet={facet}/>)}
+      {facets.map(facet => <FacetBlock selectedFilters={selectedFilters} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} key={facet.name} colorCodes={colorCodes} facet={facet}/>)}
     </div>
   )
 }
