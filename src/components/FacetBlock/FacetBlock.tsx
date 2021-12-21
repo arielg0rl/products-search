@@ -5,10 +5,11 @@ import classNames from 'classnames'
 interface Props {
   facet: Facet;
   colorCodes: Color[];
-  onFilterSelect: (styleOrName: string | ColorStyle | ImageStyle) => void;
+  onMaterialSelect: (material: string) => void;
+  onColorSelect: (color: ColorStyle | ImageStyle) => void;
 }
 
-export const FacetBlock: React.FC<Props> = ({ onFilterSelect, colorCodes, facet }) => {
+export const FacetBlock: React.FC<Props> = ({ onColorSelect, onMaterialSelect, colorCodes, facet }) => {
   const sixItems = facet.values.slice(0, 6);
 
   const [ itemsToRender, setItemsToRender ] = useState(sixItems);
@@ -46,15 +47,15 @@ export const FacetBlock: React.FC<Props> = ({ onFilterSelect, colorCodes, facet 
   }
 
   const getColor = (color: string): ColorStyle | ImageStyle => {
-    const colorCode = colorCodes.find(colorCode => color === colorCode.name) || null;
+    const colorCode = colorCodes.find(colorCode => color === colorCode.name) as Color;
 
     if (color === "Multicolor") {
-      return colorCode ? { backgroundImage: `url(${colorCode.code})`, backgroundSize: "cover"} : { backgroundColor: "white"}
+      return { id: color, backgroundImage: `url(${colorCode.code})`, backgroundSize: "cover"};
     }
     if (color === "White") {
-      return colorCode ? { backgroundColor: colorCode.code, border: "1px solid black"} : { backgroundColor: "white"}
+      return { id: color, backgroundColor: colorCode.code, border: "1px solid grey"};
     }
-    return colorCode ? { backgroundColor: colorCode.code} : { backgroundColor: "white"}
+    return { id: color, backgroundColor: colorCode.code};
   }
 
   return (
@@ -74,13 +75,13 @@ export const FacetBlock: React.FC<Props> = ({ onFilterSelect, colorCodes, facet 
           <div className="facet__options">
             {itemsToRender.map(value => {
               return (
-                <>
+                <div key={value.value}>
                 {facet.type === "text" &&
                   <div className="facet__option" key={value.value}>
                     <div className="facet__option-wrapper">
                       <div
                         className={classNames("facet__box", {})}
-                        onClick={() => onFilterSelect(value.value)}
+                        onClick={() => onMaterialSelect(value.value)}
                       >
                       </div>
                       <div className="facet__value">{value.value}</div>
@@ -95,7 +96,7 @@ export const FacetBlock: React.FC<Props> = ({ onFilterSelect, colorCodes, facet 
                       <div
                         style={getColor(value.value)}
                         className="facet__color"
-                        onClick={() => onFilterSelect(getColor(value.value))}
+                        onClick={() => onColorSelect(getColor(value.value))}
                       >
                       </div>
                       <div className="facet__value">{value.value}</div>
@@ -109,16 +110,20 @@ export const FacetBlock: React.FC<Props> = ({ onFilterSelect, colorCodes, facet 
                   <section className="range-slider">
                     <input
                       type="range"
-                      value={0}
+                      value={30}
                       min={0}
                       max={100}
                       step={1}
-                      onChange={handleMoreButton}
                     />
                     </section>
-                    <button>go</button>
+                    <button
+                      type="submit"
+                      className="facet__go-button"
+                    >
+                      go
+                    </button>
                 </div>}
-                </>
+                </div>
               )
             })}
             <div
@@ -139,3 +144,4 @@ export const FacetBlock: React.FC<Props> = ({ onFilterSelect, colorCodes, facet 
 }
 
 export default FacetBlock
+

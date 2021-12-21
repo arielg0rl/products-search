@@ -1,4 +1,6 @@
 .Filters {
+  display: grid;
+  grid-template-columns: 366px 1fr;
 
   &__section {
     font-weight: bold;

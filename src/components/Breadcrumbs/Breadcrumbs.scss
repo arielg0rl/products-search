@@ -1,0 +1,41 @@
+.Breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #939393;
+  gap: 12px;
+  padding-left: 24px;
+
+  &__piece {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  &__button {
+    width: 11px;
+    height: 11px;
+    background-image: url("../../photos/cross.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 0 10px;
+    background-position: center;
+    cursor: pointer;
+  }
+
+  &__color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
+
+  &__slash {
+    padding-left: 10px;
+  }
+}
+
+.Breadcrumbs__piece-wrapper:last-child .Breadcrumbs__piece .Breadcrumbs__slash {
+  display: none;
+}

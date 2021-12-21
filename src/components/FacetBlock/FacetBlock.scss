@@ -1,5 +1,5 @@
 .facet {
-  width: 366px;
+  max-width: 366px;
 
   &__head {
     position: relative;
@@ -135,5 +135,19 @@
 
       }
     }
+  }
+
+  &__go-button {
+    background-color: transparent;
+    border: 1px solid transparent;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #121212;
+    cursor: pointer;
+  }
+
+  &:last-child .facet__wrapper .facet__options .facet__more-button {
+    display: none;
   }
 }

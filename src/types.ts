@@ -23,11 +23,13 @@ export interface Color {
 }
 
 export interface ColorStyle {
+  id: string,
   backgroundColor: string,
   border?: string,
 }
 
 export interface ImageStyle {
+  id: string,
   backgroundImage: string,
   backgroundSize: string,
 }
