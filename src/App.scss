@@ -12,6 +12,7 @@ body {
 
 .App {
   margin: 16px;
+  max-width: 100vw;
 
   &__heading {
     font-weight: 500;

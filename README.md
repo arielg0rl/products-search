@@ -1,6 +1,6 @@
 # react-template
 
-[DEMO LINK](https://arielg0rl.github.io/react-ts-template/)
+[DEMO LINK](https://arielg0rl.github.io/products-search)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

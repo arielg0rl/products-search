@@ -1,10 +1,11 @@
 .Breadcrumbs {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   color: #939393;
   gap: 12px;
-  padding-left: 24px;
+  padding: 14px 24px;
 
   &__piece {
     display: flex;
