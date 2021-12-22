@@ -1,5 +1,9 @@
 .facet {
-  max-width: 366px;
+  width: 366px;
+
+  @media (max-width: 767px) {
+    max-width: 366px;
+  }
 
   &__head {
     position: relative;

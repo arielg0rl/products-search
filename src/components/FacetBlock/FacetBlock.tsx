@@ -14,10 +14,10 @@ export const FacetBlock: React.FC<Props> = ({ selectedFilters, onColorSelect, on
   const sixItems = facet.values.slice(0, 6);
 
   const [ itemsToRender, setItemsToRender ] = useState(sixItems);
-  const [ show6Filters, setShow6Filters ] = useState<boolean>(false);
-  const [ showAllFilters, setShowAllFilters ] = useState<boolean>(false);
-  const [ hidden, setHidden ] = useState<boolean>(true);
-  const [ moreOrLess, setMoreOrLess ] = useState<string>('More');
+  const [ show6Filters, setShow6Filters ] = useState(true);
+  const [ showAllFilters, setShowAllFilters ] = useState(false);
+  const [ hidden, setHidden ] = useState(false);
+  const [ moreOrLess, setMoreOrLess ] = useState('More');
 
   const handleOpenButton = (): void => {
     setHidden(false);

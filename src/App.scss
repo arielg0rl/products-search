@@ -21,4 +21,10 @@ body {
     text-transform: uppercase;
     padding: 14px 14px 20px;
   }
+
+  &__main {
+    display: flex;
+    left: 0;
+    right: 0;
+  }
 }

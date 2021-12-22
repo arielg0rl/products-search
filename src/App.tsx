@@ -5,13 +5,16 @@ import './components/ProductList/ProductsList.scss';
 import './components/Filters/Filters.scss';
 import './components/Breadcrumbs/Breadcrumbs.scss';
 
+import { getData } from './api';
 import Filters from './components/Filters/Filters';
 import ProductsList from './components/ProductList/ProductsList';
-import { getData } from './api';
+import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
+import { ColorStyle, ImageStyle, selectedFacet } from './types';
 
 function App() {
   const [ items, setItems ] = useState([]);
   const [ facets, setFacets ] = useState([]);
+  const [ selectedFilters, setSelectedFilters ] = useState<selectedFacet[]>([]);
 
   useEffect(() => {
     getData().then(loadedItems => {
@@ -20,11 +23,44 @@ function App() {
     });
   }, [])
 
+  const onMaterialSelect = (material: string) => {
+    if (selectedFilters.find(filter => filter.value === material)) {
+      setSelectedFilters([...selectedFilters].filter(filter => filter.value !== material));
+    } else {
+    setSelectedFilters([ ...selectedFilters, { type: 'material', value: material } ])
+    }
+  }
+
+  const onColorSelect = (color: ColorStyle | ImageStyle) => {
+    if (selectedFilters.find(filter => {
+      if (typeof filter.value !== 'string') {
+        return filter.value.id === color.id;
+      }
+    })) {
+      setSelectedFilters([...selectedFilters].filter(filter => {
+        if (typeof filter.value === 'string') {
+          return filter;
+        }
+        if (typeof filter.value !== 'string') {
+          return filter.value.id !== color.id;
+        }
+      }))
+    } else {
+       setSelectedFilters([ ...selectedFilters, { type: 'color', value: color } ]);
+    }
+  }
+
   return (
     <div className="App">
       <h1 className="App__heading">Search results</h1>
-      <Filters facets={facets}/>
-      <ProductsList items={items}/>
+      <div className="Filters">
+        <div className="Filters__section">filters</div>
+        <Breadcrumbs onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
+      </div>
+      <div className="App__main">
+        <Filters selectedFilters={selectedFilters} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} facets={facets}/>
+        <ProductsList items={items}/>
+      </div>
     </div>
   );
 }
