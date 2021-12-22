@@ -56,20 +56,29 @@
   }
 
   &__box {
-    background-image: url("../../photos/RectangleOrigin.svg");
+    position: relative;
     background-size: cover;
     width: 20px;
     height: 20px;
     transition: 0.3s;
     background-color: transparent;
-    border: none;
+    border: 1px solid #CCCCCC;
+    border-radius: 1px;
 
     &:hover {
-      background-image: url("../../photos/RectangleHover.svg");
+      border: 1px solid #121212;
     }
 
-    &--selected {
-      background-image: url("../../photos/RectangleChecked.svg");
+    &--selected::before {
+      position: absolute;
+      content: '';
+      left: 3px;
+      right: 4px;
+      bottom: 5px;
+      background-repeat: no-repeat;
+      width: 12px;
+      height: 8px;
+      background-image: url("../../photos/checkmark.svg");
     }
   }
 
