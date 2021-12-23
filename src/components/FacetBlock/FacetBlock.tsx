@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Facet, ColorStyle, ImageStyle, Color, selectedFacet } from '../../types'
+import { Facet, ColorStyle, ImageStyle, Color, selectedFacet, priceValues } from '../../types'
 import classNames from 'classnames'
 import InputRange from 'react-input-range'
 import defaultClassNames from '../../default-class-names.js';
@@ -10,9 +10,10 @@ interface Props {
   onMaterialSelect: (material: string) => void;
   onColorSelect: (color: ColorStyle | ImageStyle) => void;
   selectedFilters: selectedFacet[];
+  onPriceSelect: (v: priceValues) => void;
 }
 
-export const FacetBlock: React.FC<Props> = ({ selectedFilters, onColorSelect, onMaterialSelect, colorCodes, facet }) => {
+export const FacetBlock: React.FC<Props> = ({ onPriceSelect, selectedFilters, onColorSelect, onMaterialSelect, colorCodes, facet }) => {
   const sixItems = facet.values.slice(0, 6);
 
   const [ itemsToRender, setItemsToRender ] = useState(sixItems);
@@ -20,7 +21,7 @@ export const FacetBlock: React.FC<Props> = ({ selectedFilters, onColorSelect, on
   const [ showAllFilters, setShowAllFilters ] = useState(false);
   const [ hidden, setHidden ] = useState(false);
   const [ moreOrLess, setMoreOrLess ] = useState('More');
-  const [ rangeValue, setRangeValue ] = useState({ min: 150, max: 450 });
+  const [ rangeValue, setRangeValue ] = useState({ min: 150, max: 400 });
 
   const handleOpenButton = (): void => {
     setHidden(false);
@@ -61,6 +62,8 @@ export const FacetBlock: React.FC<Props> = ({ selectedFilters, onColorSelect, on
     }
     return { id: color, backgroundColor: colorCode.code};
   }
+
+
 
   return (
     <div className="facet">
@@ -128,8 +131,9 @@ export const FacetBlock: React.FC<Props> = ({ selectedFilters, onColorSelect, on
                       />
                       </section>
                       <button
-                        type="submit"
+                        type="button"
                         className="facet__go-button"
+                        onClick={() => onPriceSelect(rangeValue)}
                       >
                         go
                       </button>

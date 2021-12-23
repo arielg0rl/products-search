@@ -35,6 +35,11 @@ export interface ImageStyle {
 }
 
 export interface selectedFacet {
-  type: 'color' | 'material' | 'price',
+  type: 'color' | 'material' | 'range',
   value: string | ColorStyle | ImageStyle,
+}
+
+export interface priceValues {
+  min: number,
+  max: number,
 }

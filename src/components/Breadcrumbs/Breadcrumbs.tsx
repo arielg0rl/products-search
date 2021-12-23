@@ -5,12 +5,27 @@ interface Props {
   selectedFilters: selectedFacet[],
   onMaterialSelect: (material: string) => void;
   onColorSelect: (color: ColorStyle | ImageStyle) => void;
+  selectedPrice: string;
+  onPriceDelete: () => void;
 }
 
-export const Breadcrumbs: React.FC<Props> = ({ onMaterialSelect, selectedFilters }) => {
+export const Breadcrumbs: React.FC<Props> = ({ onPriceDelete, selectedPrice, onMaterialSelect, selectedFilters }) => {
   console.log(selectedFilters)
   return (
     <div className="Breadcrumbs">
+      {selectedPrice.length > 0 && (
+        <div className="Breadcrumbs__piece">
+        <label className="Breadcrumbs__facet">
+          <div className="Breadcrumbs__name">{selectedPrice}</div>
+          <button
+            className="Breadcrumbs__button"
+            onClick={() => onPriceDelete()}
+          >
+          </button>
+        </label>
+        <div className="Breadcrumbs__slash">/</div>
+      </div>
+      )}
       {selectedFilters.map(filter => {
         return (
           <div className="Breadcrumbs__piece-wrapper" key={typeof filter.value !== 'string' ? filter.value.id : filter.value}>

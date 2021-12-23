@@ -10,12 +10,13 @@ import { getData } from './api';
 import Filters from './components/Filters/Filters';
 import ProductsList from './components/ProductList/ProductsList';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
-import { ColorStyle, ImageStyle, selectedFacet } from './types';
+import { ColorStyle, ImageStyle, priceValues, selectedFacet } from './types';
 
 function App() {
   const [ items, setItems ] = useState([]);
   const [ facets, setFacets ] = useState([]);
   const [ selectedFilters, setSelectedFilters ] = useState<selectedFacet[]>([]);
+  const [ selectedPrice, setSelectedPrice ] = useState('');
 
   useEffect(() => {
     getData().then(loadedItems => {
@@ -51,19 +52,27 @@ function App() {
     }
   }
 
+  const onPriceSelect = (rangeValue: priceValues) => {
+    setSelectedPrice(`$${rangeValue.min} - $${rangeValue.max}`);
+  }
+
+  const onPriceDelete = () => {
+    setSelectedPrice('');
+  }
+
   return (
     <div className="App">
       <h1 className="App__heading">Search results</h1>
       <div className="Filters">
         <div className="Filters__section">filters</div>
         <div className="desktop-breadcrumbs">
-          <Breadcrumbs onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
+          <Breadcrumbs onPriceDelete={onPriceDelete} selectedPrice={selectedPrice} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
         </div>
       </div>
       <div className="App__main">
-        <Filters selectedFilters={selectedFilters} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} facets={facets}/>
+        <Filters onPriceSelect={onPriceSelect} selectedFilters={selectedFilters} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} facets={facets}/>
         {selectedFilters.length > 0 && <div className="mobile-breadcrumbs">
-          <Breadcrumbs onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
+          <Breadcrumbs onPriceDelete={onPriceDelete} selectedPrice={selectedPrice} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
         </div>}
         <ProductsList items={items}/>
       </div>
