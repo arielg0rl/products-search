@@ -168,6 +168,10 @@
     color: #121212;
     cursor: pointer;
     padding: 0 0 0 26px;
+
+    &:hover {
+      color: #919191;
+    }
   }
 
   &:last-child .facet__wrapper .facet__options .facet__more-button {
