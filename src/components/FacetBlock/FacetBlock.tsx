@@ -20,7 +20,7 @@ export const FacetBlock: React.FC<Props> = ({ selectedFilters, onColorSelect, on
   const [ showAllFilters, setShowAllFilters ] = useState(false);
   const [ hidden, setHidden ] = useState(false);
   const [ moreOrLess, setMoreOrLess ] = useState('More');
-  const [ rangeValue, setRangeValue ] = useState({ min: 30, max: 80 });
+  const [ rangeValue, setRangeValue ] = useState({ min: 150, max: 450 });
 
   const handleOpenButton = (): void => {
     setHidden(false);
