@@ -1,9 +1,9 @@
 .facet {
-  width: 366px;
+  max-width: 366px;
   border-top: 1px solid #EFEFEF;
 
-  @media (min-width: 767px) {
-    max-width: 366px;
+  @media (min-width: 768px) {
+    min-width: 366px;
   }
 
   &__head {
@@ -167,6 +167,7 @@
     text-transform: uppercase;
     color: #121212;
     cursor: pointer;
+    padding: 0 0 0 26px;
   }
 
   &:last-child .facet__wrapper .facet__options .facet__more-button {
