@@ -66,14 +66,35 @@ function App() {
       <div className="Filters">
         <div className="Filters__section">filters</div>
         <div className="desktop-breadcrumbs">
-          <Breadcrumbs onPriceDelete={onPriceDelete} selectedPrice={selectedPrice} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
+          <Breadcrumbs
+            onPriceDelete={onPriceDelete}
+            selectedPrice={selectedPrice}
+            onColorSelect={onColorSelect}
+            onMaterialSelect={onMaterialSelect}
+            selectedFilters={selectedFilters}
+          />
         </div>
       </div>
       <div className="App__main">
-        <Filters onPriceSelect={onPriceSelect} selectedFilters={selectedFilters} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} facets={facets}/>
-        {selectedFilters.length > 0 && <div className="mobile-breadcrumbs">
-          <Breadcrumbs onPriceDelete={onPriceDelete} selectedPrice={selectedPrice} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
-        </div>}
+        <Filters
+          onPriceSelect={onPriceSelect}
+          selectedFilters={selectedFilters}
+          onColorSelect={onColorSelect}
+          onMaterialSelect={onMaterialSelect}
+          facets={facets}
+        />
+        {(selectedFilters.length > 0 || selectedPrice.length > 0) 
+        && (
+        <div className="mobile-breadcrumbs">
+          <Breadcrumbs
+            onPriceDelete={onPriceDelete}
+            selectedPrice={selectedPrice}
+            onColorSelect={onColorSelect}
+            onMaterialSelect={onMaterialSelect}
+            selectedFilters={selectedFilters}
+          />
+        </div>
+        )}
         <ProductsList items={items}/>
       </div>
     </div>

@@ -9,8 +9,12 @@ interface Props {
   onPriceDelete: () => void;
 }
 
-export const Breadcrumbs: React.FC<Props> = ({ onPriceDelete, selectedPrice, onMaterialSelect, selectedFilters }) => {
-  console.log(selectedFilters)
+export const Breadcrumbs: React.FC<Props> = ({
+  onPriceDelete,
+  selectedPrice,
+  onMaterialSelect,
+  selectedFilters,
+}) => {
   return (
     <div className="Breadcrumbs">
       {selectedPrice.length > 0 && (
@@ -28,7 +32,10 @@ export const Breadcrumbs: React.FC<Props> = ({ onPriceDelete, selectedPrice, onM
       )}
       {selectedFilters.map(filter => {
         return (
-          <div className="Breadcrumbs__piece-wrapper" key={typeof filter.value !== 'string' ? filter.value.id : filter.value}>
+          <div
+            className="Breadcrumbs__piece-wrapper"
+            key={typeof filter.value !== 'string' ? filter.value.id : filter.value}
+          >
             {filter.type === 'material' &&
             <div className="Breadcrumbs__piece">
               <label className="Breadcrumbs__facet">

@@ -12,7 +12,13 @@ interface Props {
   onPriceSelect: (v: priceValues) => void;
 }
 
-export const Filters: React.FC<Props> = ({ selectedFilters, facets, onMaterialSelect, onColorSelect, onPriceSelect }) => {
+export const Filters: React.FC<Props> = ({
+  selectedFilters,
+  facets,
+  onMaterialSelect,
+  onColorSelect,
+  onPriceSelect
+}) => {
   const [ colorCodes, setColorCodes ] = useState<Color[]>([]);
 
   useEffect(() => {
@@ -23,7 +29,17 @@ export const Filters: React.FC<Props> = ({ selectedFilters, facets, onMaterialSe
 
   return (
     <div>
-      {facets.map(facet => <FacetBlock onPriceSelect={onPriceSelect} selectedFilters={selectedFilters} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} key={facet.name} colorCodes={colorCodes} facet={facet}/>)}
+      {facets.map(facet =>
+        <FacetBlock
+          onPriceSelect={onPriceSelect}
+          selectedFilters={selectedFilters}
+          onColorSelect={onColorSelect}
+          onMaterialSelect={onMaterialSelect}
+          key={facet.name}
+          colorCodes={colorCodes}
+          facet={facet} 
+        />
+      )}
     </div>
   )
 }
