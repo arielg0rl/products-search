@@ -20,6 +20,12 @@ body {
     line-height: 28px;
     text-transform: uppercase;
     padding: 14px 14px 20px;
+
+    @media (max-width: 767px) {
+      display: flex;
+      justify-content: center;
+      padding: 15px 0 5px 0;
+    }
   }
 
   &__main {

@@ -4,6 +4,7 @@ import './components/FacetBlock/FacetBlock.scss';
 import './components/ProductList/ProductsList.scss';
 import './components/Filters/Filters.scss';
 import './components/Breadcrumbs/Breadcrumbs.scss';
+import 'react-input-range/lib/css/index.css';
 
 import { getData } from './api';
 import Filters from './components/Filters/Filters';

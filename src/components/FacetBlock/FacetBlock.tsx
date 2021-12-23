@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Facet, ColorStyle, ImageStyle, Color, selectedFacet } from '../../types'
 import classNames from 'classnames'
+import InputRange from 'react-input-range'
+import defaultClassNames from '../../default-class-names.js';
 
 interface Props {
   facet: Facet;
@@ -18,6 +20,7 @@ export const FacetBlock: React.FC<Props> = ({ selectedFilters, onColorSelect, on
   const [ showAllFilters, setShowAllFilters ] = useState(false);
   const [ hidden, setHidden ] = useState(false);
   const [ moreOrLess, setMoreOrLess ] = useState('More');
+  const [ rangeValue, setRangeValue ] = useState({ min: 30, max: 80 });
 
   const handleOpenButton = (): void => {
     setHidden(false);
@@ -113,12 +116,15 @@ export const FacetBlock: React.FC<Props> = ({ selectedFilters, onColorSelect, on
                 {facet.type === "range" &&
                   <div className="facet__option" key={value.value}>
                   <section className="range-slider">
-                    <input
-                      type="range"
-                      value={30}
-                      min={0}
-                      max={100}
-                      step={1}
+                    <InputRange
+                      classNames={defaultClassNames}
+                      formatLabel={value => `$${value}`}
+                      minValue={+value.value.split('_')[0]}
+                      maxValue={+value.value.split('_')[1]}
+                      value={rangeValue}
+                      onChange={value => {
+                        return typeof value !== "number" &&
+                        setRangeValue({ min: value.min, max: value.max })}}
                     />
                     </section>
                     <button
