@@ -2,6 +2,18 @@
   display: grid;
   grid-template-columns: 366px 1fr;
 
+  @media (max-width: 767px) {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 35px 0 5px 0;
+    max-width: 366px;
+
+    & :first-child {
+      align-self: center;
+    }
+  }
+
   &__section {
     font-weight: bold;
     font-size: 14px;
@@ -15,8 +27,8 @@
       height: 1px;
       background-color: #EFEFEF;
       transform: translateY(-27px);
-      left: 14px;
-      right: 14px;
+      left: 16px;
+      right: 16px;
     }
   }
 }

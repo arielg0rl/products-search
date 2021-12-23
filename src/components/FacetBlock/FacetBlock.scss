@@ -1,9 +1,6 @@
 .facet {
-  width: 366px;
-
-  @media (max-width: 767px) {
-    max-width: 366px;
-  }
+  max-width: 366px;
+  border-top: 1px solid #EFEFEF;
 
   &__head {
     position: relative;
@@ -12,26 +9,6 @@
     align-items: center;
     height: 54px;
     cursor: pointer;
-
-    &::before {
-      position: absolute;
-      content: '';
-      left: 0;
-      right: 0;
-      height: 1px;
-      background-color: #EFEFEF;
-      transform: translateY(-27px);
-    }
-
-    &:last-child::after {
-      position: absolute;
-      content: '';
-      left: 0;
-      right: 0;
-      height: 1px;
-      background-color: #EFEFEF;
-      transform: translateY(27px);
-    }
   }
 
   &__name {
@@ -178,6 +155,7 @@
   }
 
   &__go-button {
+    display: block;
     background-color: transparent;
     border: 1px solid transparent;
     font-weight: 500;
@@ -196,7 +174,24 @@
   width: 265px;
 }
 
-.input-range__track--active {
-  background: black;
-  color: #121212;
+.input-range {
+  &__track {
+    border-radius: 2px;
+    height: 3px;
+  }
+
+  &__track--active {
+    background-color: #121212;
+  }
+
+  &__slider {
+    background-color: #121212;
+    border: 1px solid #121212;
+  }
+
+  &__label {
+    color: #818080;
+    font-family: Roboto, san-serif;
+    font-size: 14px;
+  }
 }

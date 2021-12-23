@@ -13,6 +13,11 @@
     justify-content: center;
     padding-left: 24px;
     gap: 18px;
+
+    @media (max-width: 767px) {
+      padding: 0;
+      margin-top: 56px;
+    }
   }
 
   &-card {
@@ -26,6 +31,11 @@
       height: 346px;
       object-fit: contain;
       background-color: #f7f7f7;
+
+      @media (max-width: 767px) {
+        width: 336px;
+        height: 472px;
+      }
     }
 
     &-wrapper {
@@ -96,6 +106,10 @@
 
     &__old-price {
       color: #939393;
+
+      @media (max-width: 767px) {
+        text-decoration: line-through;
+      }
     }
   }
 }

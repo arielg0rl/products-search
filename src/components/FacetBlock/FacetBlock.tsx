@@ -115,25 +115,25 @@ export const FacetBlock: React.FC<Props> = ({ selectedFilters, onColorSelect, on
 
                 {facet.type === "range" &&
                   <div className="facet__option" key={value.value}>
-                  <section className="range-slider">
-                    <InputRange
-                      classNames={defaultClassNames}
-                      formatLabel={value => `$${value}`}
-                      minValue={+value.value.split('_')[0]}
-                      maxValue={+value.value.split('_')[1]}
-                      value={rangeValue}
-                      onChange={value => {
-                        return typeof value !== "number" &&
-                        setRangeValue({ min: value.min, max: value.max })}}
-                    />
-                    </section>
-                    <button
-                      type="submit"
-                      className="facet__go-button"
-                    >
-                      go
-                    </button>
-                </div>}
+                    <section className="range-slider">
+                      <InputRange
+                        classNames={defaultClassNames}
+                        formatLabel={value => `$${value}`}
+                        minValue={+value.value.split('_')[0]}
+                        maxValue={+value.value.split('_')[1]}
+                        value={rangeValue}
+                        onChange={value => {
+                          return typeof value !== "number" &&
+                          setRangeValue({ min: value.min, max: value.max })}}
+                      />
+                      </section>
+                      <button
+                        type="submit"
+                        className="facet__go-button"
+                      >
+                        go
+                      </button>
+                  </div>}
                 </div>
               )
             })}

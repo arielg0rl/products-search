@@ -56,10 +56,15 @@ function App() {
       <h1 className="App__heading">Search results</h1>
       <div className="Filters">
         <div className="Filters__section">filters</div>
-        <Breadcrumbs onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
+        <div className="desktop-breadcrumbs">
+          <Breadcrumbs onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
+        </div>
       </div>
       <div className="App__main">
         <Filters selectedFilters={selectedFilters} onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} facets={facets}/>
+        {selectedFilters.length > 0 && <div className="mobile-breadcrumbs">
+          <Breadcrumbs onColorSelect={onColorSelect} onMaterialSelect={onMaterialSelect} selectedFilters={selectedFilters}/>
+        </div>}
         <ProductsList items={items}/>
       </div>
     </div>

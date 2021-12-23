@@ -11,8 +11,15 @@ body {
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
   margin: 16px;
   max-width: 100vw;
+
+  @media (max-width: 767px) {
+    max-width: 366px;
+    margin: 0 auto;
+  }
 
   &__heading {
     font-weight: 500;
@@ -24,7 +31,7 @@ body {
     @media (max-width: 767px) {
       display: flex;
       justify-content: center;
-      padding: 15px 0 5px 0;
+      padding: 35px 0 5px 0;
     }
   }
 
@@ -32,5 +39,31 @@ body {
     display: flex;
     left: 0;
     right: 0;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      margin: 0 auto;
+      max-width: 336px;
+    }
+  }
+}
+
+.mobile-breadcrumbs {
+  margin-top: 26px;
+  border-bottom: 1px solid #EFEFEF;
+  border-top: 1px solid #EFEFEF;
+  padding: 10px 0;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.desktop-breadcrumbs {
+  display: flex;
+  align-content: center;
+
+  @media (max-width: 767px) {
+    display: none;
   }
 }
