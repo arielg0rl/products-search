@@ -1,7 +1,5 @@
 import React from 'react'
 import { Item } from '../../types'
-import classNames from 'classnames'
-import { getByTitle } from '@testing-library/react'
 
 interface Props {
   items: Item[];

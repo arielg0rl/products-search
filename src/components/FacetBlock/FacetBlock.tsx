@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import { Facet, ColorStyle, ImageStyle, Color, selectedFacet, priceValues } from '../../types'
 import classNames from 'classnames'
-import InputRange from 'react-input-range'
-import defaultClassNames from '../../default-class-names.js';
+import { FilterTypes } from '../FilterTypes/FilterTypes';
 
 interface Props {
   facet: Facet;
-  colorCodes: Color[];
   onMaterialSelect: (material: string) => void;
   onColorSelect: (color: ColorStyle | ImageStyle) => void;
   selectedFilters: selectedFacet[];
   onPriceSelect: (v: priceValues) => void;
+  colorCodes: Color[];
 }
 
 export const FacetBlock: React.FC<Props> = ({
@@ -18,65 +17,44 @@ export const FacetBlock: React.FC<Props> = ({
   selectedFilters,
   onColorSelect,
   onMaterialSelect,
-  colorCodes,
   facet,
+  colorCodes,
 }) => {
-  const sixItems = facet.values.slice(0, 6);
+  const limitedItems = facet.values.slice(0, 6);
 
-  const [ itemsToRender, setItemsToRender ] = useState(sixItems);
-  const [ show6Filters, setShow6Filters ] = useState(true);
-  const [ showAllFilters, setShowAllFilters ] = useState(false);
-  const [ hidden, setHidden ] = useState(false);
-  const [ moreOrLess, setMoreOrLess ] = useState('More');
-  const [ rangeValue, setRangeValue ] = useState({ min: 150, max: 400 });
+  const [itemsToRender, setItemsToRender] = useState(limitedItems);
+  const [showMoreFilters, setShowMoreFilters] = useState(true);
+  const [showAllFilters, setShowAllFilters] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleOpenButton = (): void => {
     setHidden(false);
-    setShow6Filters(true);
+    setShowMoreFilters(true);
   }
 
   const handleCloseButton = (): void => {
     setShowAllFilters(false);
     setHidden(true);
-    setShow6Filters(false);
-    setItemsToRender(sixItems);
-    setMoreOrLess('More');
+    setShowMoreFilters(false);
+    setItemsToRender(limitedItems);
+    setIsExpanded(false);
   }
 
   const handleMoreButton = (): void => {
-    if (show6Filters) {
+    if (showMoreFilters) {
       setShowAllFilters(true);
-      setShow6Filters(false);
+      setShowMoreFilters(false);
       setItemsToRender(facet.values);
-      setMoreOrLess('Less');
+      setIsExpanded(true);
     }
     if (showAllFilters) {
-      setItemsToRender(sixItems);
-      setMoreOrLess('More');
-      setShow6Filters(true);
+      setItemsToRender(limitedItems);
+      setIsExpanded(false);
+      setShowMoreFilters(true);
       setShowAllFilters(false);
     }
   }
-
-  const getColor = (color: string): ColorStyle | ImageStyle => {
-    const colorCode = colorCodes.find(colorCode => color === colorCode.name) as Color;
-
-    if (color === "Multicolor") {
-      return {
-        id: color, backgroundImage: `url(${colorCode.code})`,
-        backgroundSize: "cover"
-      };
-    }
-    if (color === "White") {
-      return {
-        id: color, backgroundColor: colorCode.code,
-        border: "1px solid grey"
-      };
-    }
-    return { id: color, backgroundColor: colorCode.code};
-  }
-
-
 
   return (
     <div className="facet">
@@ -103,66 +81,15 @@ export const FacetBlock: React.FC<Props> = ({
             {itemsToRender.map(value => {
               return (
                 <div key={value.value}>
-                {facet.type === "text" &&
-                  <div className="facet__option" key={value.value}>
-                    <label className="facet__option-wrapper">
-                      <button
-                        className={classNames("facet__box",
-                          {'facet__box--selected': selectedFilters.find(facet => facet.value === value.value)})}
-                        onClick={() => {
-                          onMaterialSelect(value.value);
-                        }}
-                      >
-                      </button>
-                      <div className="facet__value">{value.value}</div>
-                    </label>
-                    <div className="facet__count">({value.count})</div>
-                  </div>
-                }
-
-                {facet.type === "color" &&
-                  <div className="facet__option" key={value.value}>
-                    <label className="facet__option-wrapper">
-                      <button
-                        style={getColor(value.value)}
-                        className={classNames("facet__color",
-                          {'facet__color--selected-color': selectedFilters.find(facet => {
-                            return typeof facet.value !== 'string'
-                              ? (facet.value).id === getColor(value.value).id
-                              : null;
-                          })}
-                        )}
-                        onClick={() => onColorSelect(getColor(value.value))}
-                      >
-                      </button>
-                      <div className="facet__value">{value.value}</div>
-                    </label>
-                    <div className="facet__count">({value.count})</div>
-                  </div>
-                }
-
-                {facet.type === "range" &&
-                  <div className="facet__option" key={value.value}>
-                    <section className="range-slider">
-                      <InputRange
-                        classNames={defaultClassNames}
-                        formatLabel={value => `$${value}`}
-                        minValue={+value.value.split('_')[0]}
-                        maxValue={+value.value.split('_')[1]}
-                        value={rangeValue}
-                        onChange={value => {
-                          return typeof value !== "number" &&
-                          setRangeValue({ min: value.min, max: value.max })}}
-                      />
-                      </section>
-                      <button
-                        type="button"
-                        className="facet__go-button"
-                        onClick={() => onPriceSelect(rangeValue)}
-                      >
-                        go
-                      </button>
-                  </div>}
+                  <FilterTypes
+                    facet={facet}
+                    value={value}
+                    selectedFilters={selectedFilters}
+                    onMaterialSelect={onMaterialSelect}
+                    onColorSelect={onColorSelect}
+                    onPriceSelect={onPriceSelect}
+                    colorCodes={colorCodes}
+                  />
                 </div>
               )
             })}
@@ -171,9 +98,9 @@ export const FacetBlock: React.FC<Props> = ({
               onClick={handleMoreButton}
             >
               <div className={classNames("facet__more-button-word",
-                { "facet__more-button-word--plus" : moreOrLess === 'More'}
+                { "facet__more-button-word--plus": isExpanded === false }
               )}>
-                {moreOrLess}
+                {isExpanded ? "Less" : "More"}
               </div>
             </div>
           </div>

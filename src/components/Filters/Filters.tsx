@@ -19,7 +19,8 @@ export const Filters: React.FC<Props> = ({
   onColorSelect,
   onPriceSelect
 }) => {
-  const [ colorCodes, setColorCodes ] = useState<Color[]>([]);
+
+  const [colorCodes, setColorCodes] = useState<Color[]>([]);
 
   useEffect(() => {
     getColorCodes().then(loadedColors => {
@@ -36,8 +37,8 @@ export const Filters: React.FC<Props> = ({
           onColorSelect={onColorSelect}
           onMaterialSelect={onMaterialSelect}
           key={facet.name}
+          facet={facet}
           colorCodes={colorCodes}
-          facet={facet} 
         />
       )}
     </div>
