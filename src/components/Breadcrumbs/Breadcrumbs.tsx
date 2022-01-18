@@ -14,6 +14,7 @@ export const Breadcrumbs: React.FC<Props> = ({
   selectedPrice,
   onMaterialSelect,
   selectedFilters,
+  onColorSelect,
 }) => {
   return (
     <div className="Breadcrumbs">
@@ -60,7 +61,7 @@ export const Breadcrumbs: React.FC<Props> = ({
                 </div>
                 <button
                   className="Breadcrumbs__button"
-                  onClick={() => onMaterialSelect(filter.value as string)}
+                  onClick={() => onColorSelect(filter.value as ColorStyle | ImageStyle)}
                 >
                 </button>
               </label>

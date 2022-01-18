@@ -83,7 +83,7 @@ function App() {
           onMaterialSelect={onMaterialSelect}
           facets={facets}
         />
-        {(selectedFilters.length > 0 || selectedPrice.length > 0) 
+        {(selectedFilters.length > 0 || selectedPrice.length > 0)
         && (
         <div className="mobile-breadcrumbs">
           <Breadcrumbs
